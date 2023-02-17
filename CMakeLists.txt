@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.16)
+project(my_serverless_recipe_site_sim)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../cadmium_v2/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../cadmium_v2/json/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+message(${CMAKE_CURRENT_SOURCE_DIR}/../cadmium_v2/include)
+add_executable(serverless_recipe_site_sim main.cpp)
