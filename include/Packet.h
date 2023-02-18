@@ -24,7 +24,7 @@ namespace sim{
     }
 
     struct Packet {
-        Packet(const Packet &packet) = default;
+        Packet(const Packet &p) = default;
 
         double creationTime;
         PacketType type;
@@ -32,8 +32,20 @@ namespace sim{
         std::string source;
 
         Packet()= default;
-        Packet(Packet& packet) = default;
+        Packet(Packet& p) = default;
 
+        explicit Packet(const std::shared_ptr<const Packet>* p){
+            creationTime=p->get()->creationTime;
+            type=p->get()->type;
+            dest=p->get()->dest;
+            source=p->get()->source;
+        }
+        explicit Packet(const std::shared_ptr<const Packet> p){
+            creationTime=p->creationTime;
+            type=p->type;
+            dest=p->dest;
+            source=p->source;
+        }
         /**
          *
          * @param ct the creation time
@@ -46,8 +58,6 @@ namespace sim{
             type(t),
             dest(std::move(d)),
             source(std::move(s)){}
-
-
     };
 
 

@@ -35,7 +35,7 @@ namespace sim{
         }
 
         void output(const ClientGenState& s) const override {
-            webRequestPort->addMessage(Packet(s.clock+sendPeriod,PacketType::REQUEST,NAME,"Server"));
+            webRequestPort->addMessage(s.clock+sendPeriod, PacketType::REQUEST, NAME, "PAGE");
             //todo: replace server with constant
         }
         [[nodiscard]] double timeAdvance(const ClientGenState& s) const override {

@@ -11,7 +11,7 @@ namespace sim {
          * @param id
          */
         Internet(const std::string& id, const double sendPeriod): Coupled(id) {
-            auto generator = addComponent<Client>("Client", sendPeriod);
+            auto generator = addComponent<Client>(sendPeriod);
         }
     };
 }
