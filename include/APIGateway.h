@@ -44,8 +44,12 @@ namespace sim{
             else{
                 s.r = s.r - e;
             }
-            s.queue.emplace(resIn.get()->getBag().back());
-            s.queue.emplace(reqIn.get()->getBag().back());
+            if(!resIn.get()->empty()){
+                s.queue.emplace(resIn.get()->getBag().back());
+            }
+            if(!reqIn.get()->empty()){
+                s.queue.emplace(reqIn.get()->getBag().back());
+            }
         }
 
         void output(const APIGatewayState& s) const override {
