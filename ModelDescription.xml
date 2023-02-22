@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Models>
+    <Model name="Internet" type="coupled" description="a coupled system representing the internet">
+        <Files>
+            <File name="Internet.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <Model name="Client" type="coupled" description="a coupled system representing the client wanting to access a webpage">
+        <Inputs>
+            <Port name="webInPort" type="Packet" description="web Responses coming into the client"/>
+        </Inputs>
+        <Outputs>
+            <Port name="webOutPort" type="Packet" description="web Requests being sent from the client to the S3 Bucket"/>
+            <Port name="apiOutPort" type="Packet" description="web Requests being sent from the client to the API Gateway"/>
+        </Outputs>
+        <Files>
+            <File name="Client.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <Model name="Cloud" type="coupled" description="a coupled system representing the cloud">
+        <Inputs>
+            <Port name="webRequestFromClient" type="Packet" description="web requests coming into the S3 bucket"/>
+            <Port name="apiRequestFromClient" type="Packet" description="web requests coming into the API Gateway"/>
+        </Inputs>
+        <Outputs>
+            <Port name="responseToClient" type="Packet" description="Responses being sent from the bucket to the client"/>
+        </Outputs>
+        <Files>
+            <File name="Cloud.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <XXXXXModel name="Lambda" type="coupled" description="a coupled system representing the lambda">
+        <Inputs>
+            <Port name="webRequestFromClient" type="Packet" description="web requests coming into the S3 bucket"/>
+            <Port name="apiRequestFromClient" type="Packet" description="web requests coming into the API Gateway"/>
+        </Inputs>
+        <Outputs>
+            <Port name="responseToClient" type="Packet" description="responses being sent from the bucket to the client"/>
+        </Outputs>
+        <Files>
+            <File name="Lambda.h" type="H" location="/include/"/>
+        </Files>
+    </XXXXXModel>
+    <Model name="ClientGenerator" type="atomic" description="an atomic system which generates messages to be sent to the S3 Bucket">
+        <Outputs>
+            <Port name="webRequestPort" type="Packet" description="sends Web Requests to the dispatcher"/>
+        </Outputs>
+        <Files>
+            <File name="ClientGenerator.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <Model name="ClientDispatcher" type="atomic" description="an atomic system which dispatches client requests to either the S3 Bucket or the API Gateway">
+        <Inputs>
+            <Port name="in" type="Packet" description="web packets which are to be sent to the Bucket or to the API Gateway"/>
+        </Inputs>
+        <Outputs>
+            <Port name="pageOut" type="Packet" description="web requests being sent from the client to the S3 Bucket"/>
+            <Port name="apiOut" type="Packet" description="web requests being sent from the client to the API Gateway"/>
+        </Outputs>
+        <Files>
+            <File name="ClientDispatcher.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <Model name="S3 Bucket" type="atomic" description="an atomic system which takes in client requests and generates a response">
+        <Inputs>
+            <Port name="reqIn" type="Packet" description="web requests to access a page, which a response is generated for"/>
+        </Inputs>
+        <Outputs>
+            <Port name="resOut" type="Packet" description="web responses sent back to the client after receiving a request"/>
+        </Outputs>
+        <Files>
+            <File name="Bucket.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <Model name="REST API Gateway" type="atomic" description="an atomic system which forwards responses and requests between the lambda and the client">
+        <Inputs>
+            <Port name="reqIn" type="Packet" description="incoming web requests from the client"/>
+            <Port name="resIn" type="Packet" description="incoming web responses from the lambda"/>
+        </Inputs>
+        <Outputs>
+            <Port name="reqOut" type="Packet" description="web requests being sent to the lambda"/>
+            <Port name="resOut" type="Packet" description="web responses being sent to the client"/>
+        </Outputs>
+        <Files>
+            <File name="APIGateway.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <Model name="Database" type="atomic" description="an atomic system which takes in lambda requests and generates a response">
+        <Inputs>
+            <Port name="reqIn" type="Packet" description="requests to access from the database"/>
+        </Inputs>
+        <Outputs>
+            <Port name="resOut" type="Packet" description="responses from the database being sent to the lambda"/>
+        </Outputs>
+        <Files>
+            <File name="Database.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <XXXXXXModel name="Dispatcher" type="atomic" description="an atomic system which dispatches Database requests to the proper executor">
+        <Inputs>
+        </Inputs>
+        <Outputs>
+        </Outputs>
+        <Files>
+            <File name="Dispatcher.h" type="H" location="/include/"/>
+        </Files>
+    </XXXXXXModel>
+    <XXXXXXModel name="Executor" type="atomic" description="an atomic system which executes requests and passes back responses">
+        <Inputs>
+        </Inputs>
+        <Outputs>
+        </Outputs>
+        <Files>
+            <File name="Executor.h" type="H" location="/include/"/>
+        </Files>
+    </XXXXXXModel>
+</Models>
