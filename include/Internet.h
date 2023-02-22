@@ -3,6 +3,8 @@
 
 #include <cadmium/core/modeling/coupled.hpp>
 #include "Client.h"
+#include "Cloud.h"
+
 
 namespace sim {
     struct Internet : public cadmium::Coupled {
@@ -11,7 +13,13 @@ namespace sim {
          * @param id
          */
         Internet(const std::string& id, const double sendPeriod): Coupled(id) {
-            auto generator = addComponent<Client>(sendPeriod);
+            auto client = addComponent<Client>(sendPeriod);
+            auto cloud = addComponent<Cloud>();
+
+            addIC(client->apiOutPort, cloud->apiRequestFromClient);
+            addIC(client->webOutPort, cloud->webRequestFromClient);
+            addIC(cloud->responseToClient, client->webInPort);
+
         }
     };
 }
