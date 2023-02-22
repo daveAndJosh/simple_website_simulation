@@ -4,6 +4,10 @@
 
 #ifndef SIMPLE_WEBSITE_SIMULATION_BUCKET_H
 #define SIMPLE_WEBSITE_SIMULATION_BUCKET_H
+#include <cadmium/core/modeling/atomic.hpp>
+#include <queue>
+#include <limits>
+#include <iostream>
 #include "Packet.h"
 namespace sim{
     struct BucketState{
@@ -47,7 +51,6 @@ namespace sim{
             auto front = s.queue.front();
             if(front.type == PacketType::REQUEST){
                 resOut->addMessage(front.creationTime, PacketType::RESPONSE, NAME, "BROWSER");
-
             }
             else{
                 std::stringstream message;

@@ -8,6 +8,7 @@
 #include "Bucket.h"
 #include "Database.h"
 #include "APIGateway.h"
+#include <cadmium/core/modeling/coupled.hpp>
 namespace sim {
     struct Cloud : public cadmium::Coupled {
 
@@ -37,7 +38,7 @@ namespace sim {
             addEIC(apiRequestFromClient, apiGateway->reqIn);
             addEIC(webRequestFromClient, bucket->reqIn);
 
-            addEOC(responseToClient, apiGateway->resOut);
+            addEOC(bucket->resOut, responseToClient);
         }
     };
 }

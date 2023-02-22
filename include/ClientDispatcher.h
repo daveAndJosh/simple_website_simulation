@@ -47,7 +47,10 @@ namespace sim{
             else{
                 s.r = s.r - e;
             }
-            s.queue.emplace(in.get()->getBag().back());
+            for(const auto& val : in.get()->getBag()){
+                s.queue.emplace(val);
+            }
+            in->clear();
         }
 
         void output(const ClientDispatchState& s) const override {
@@ -55,8 +58,8 @@ namespace sim{
             if(front.dest == "PAGE"){
                 pageOut->addMessage(front);
             }
-            else if(front.dest == "API"){
-                pageOut->addMessage(front);
+            else if(front.type == PacketType::RESPONSE&& front.dest == "BROWSER"){ // change packet to a request and sends it
+                apiOut->addMessage(front.creationTime, PacketType::REQUEST, "BROWSER", "API");
             }
             else{
                 std::stringstream message;
