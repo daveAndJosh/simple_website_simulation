@@ -17,7 +17,7 @@ namespace sim {
             auto dispatcher = addComponent<ClientDispatch>("ClientDispatch");
 
             //make ports
-            webInPort = addOutBigPort<Packet>("Client Web In");
+            webInPort = addInBigPort<Packet>("Client Web In");
             webOutPort = addOutBigPort<Packet>("Client Web Out");
             apiOutPort = addOutBigPort<Packet>("Client API Out");
             //internal couplings

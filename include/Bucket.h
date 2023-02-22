@@ -46,7 +46,7 @@ namespace sim{
         void output(const BucketState& s) const override {
             auto front = s.queue.front();
             if(front.type == PacketType::REQUEST){
-                resOut->addMessage(front.creationTime, PacketType::RESPONSE, NAME, "DATABASE");
+                resOut->addMessage(front.creationTime, PacketType::RESPONSE, NAME, "BROWSER");
 
             }
             else{
