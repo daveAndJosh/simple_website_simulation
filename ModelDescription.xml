@@ -7,7 +7,8 @@
     </Model>
     <Model name="Client" type="coupled" description="a coupled system representing the client wanting to access a webpage">
         <Inputs>
-            <Port name="webInPort" type="Packet" description="web Responses coming into the client"/>
+            <Port name="webInPort" type="Packet" description="web Responses coming into the client from the S3 Bucket"/>
+            <Port name="apiInPort" type="Packet" description="api Responses coming into the client from the API Gateway"/>
         </Inputs>
         <Outputs>
             <Port name="webOutPort" type="Packet" description="web Requests being sent from the client to the S3 Bucket"/>
@@ -23,24 +24,26 @@
             <Port name="apiRequestFromClient" type="Packet" description="web requests coming into the API Gateway"/>
         </Inputs>
         <Outputs>
-            <Port name="responseToClient" type="Packet" description="Responses being sent from the bucket to the client"/>
+            <Port name="apiResponseToClient" type="Packet" description="Responses being sent from the API Gateway to the client"/>
+            <Port name="webResponseToClient" type="Packet" description="Responses being sent from the bucket to the client"/>
         </Outputs>
         <Files>
             <File name="Cloud.h" type="H" location="/include/"/>
         </Files>
     </Model>
-    <XXXXXModel name="Lambda" type="coupled" description="a coupled system representing the lambda">
+    <Model name="Lambda" type="coupled" description="a coupled system representing the lambda">
         <Inputs>
-            <Port name="webRequestFromClient" type="Packet" description="web requests coming into the S3 bucket"/>
-            <Port name="apiRequestFromClient" type="Packet" description="web requests coming into the API Gateway"/>
+            <Port name="dbReceive" type="Packet" description="incoming responses from the Database"/>
+            <Port name="reqIn" type="Packet" description="incoming web requests from the API Gateway"/>
         </Inputs>
         <Outputs>
-            <Port name="responseToClient" type="Packet" description="responses being sent from the bucket to the client"/>
+            <Port name="dbSend" type="Packet" description="web requests being sent to the Database"/>
+            <Port name="rspOut" type="Packet" description="web responses being sent back"/>
         </Outputs>
         <Files>
             <File name="Lambda.h" type="H" location="/include/"/>
         </Files>
-    </XXXXXModel>
+    </Model>
     <Model name="ClientGenerator" type="atomic" description="an atomic system which generates messages to be sent to the S3 Bucket">
         <Outputs>
             <Port name="webRequestPort" type="Packet" description="sends Web Requests to the dispatcher"/>
@@ -59,6 +62,14 @@
         </Outputs>
         <Files>
             <File name="ClientDispatcher.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
+    <Model name="Packet Counter" type="atomic" description="an atomic system which recieves packets and increments">
+        <Inputs>
+            <Port name="packetInputPort" type="Packet" description="incoming packets to increment"/>
+        </Inputs>
+        <Files>
+            <File name="PacketCounter.h" type="H" location="/include/"/>
         </Files>
     </Model>
     <Model name="S3 Bucket" type="atomic" description="an atomic system which takes in client requests and generates a response">
@@ -85,6 +96,20 @@
             <File name="APIGateway.h" type="H" location="/include/"/>
         </Files>
     </Model>
+    <Model name="Switch" type="atomic" description="an atomic system which acts as a switch between the lambda and database">
+        <Inputs>
+            <Port name="messageIn" type="Packet" description="oncoming messages"/>
+        </Inputs>
+        <Outputs>
+            <Port name="database" type="Packet" description="output to the database"/>
+            <Port name="messageOut_1" type="Packet" description="output to executor 1"/>
+            <Port name="messageOut_2" type="Packet" description="output to executor 2"/>
+            <Port name="messageOut_3" type="Packet" description="output to executor 3"/>
+        </Outputs>
+        <Files>
+            <File name="Switch.h" type="H" location="/include/"/>
+        </Files>
+    </Model>
     <Model name="Database" type="atomic" description="an atomic system which takes in lambda requests and generates a response">
         <Inputs>
             <Port name="reqIn" type="Packet" description="requests to access from the database"/>
@@ -96,22 +121,32 @@
             <File name="Database.h" type="H" location="/include/"/>
         </Files>
     </Model>
-    <XXXXXXModel name="Dispatcher" type="atomic" description="an atomic system which dispatches Database requests to the proper executor">
+    <Model name="Lambda Dispatcher" type="atomic" description="an atomic system which dispatches Database requests to the proper executor">
         <Inputs>
+            <Port name="isReadyPort" type="Integer" description="messages from the executor that they are ready to receive"/>
+            <Port name="queueIn" type="Packet" description="incoming requests which need to be processed"/>
         </Inputs>
         <Outputs>
+            <Port name="execPort_1" type="Packet" description="outgoing requests to executor 1"/>
+            <Port name="execPort_2" type="Packet" description="outgoing requests to executor 2"/>
+            <Port name="execPort_3" type="Packet" description="outgoing requests to executor 3"/>
         </Outputs>
         <Files>
-            <File name="Dispatcher.h" type="H" location="/include/"/>
+            <File name="LambdaDispatcher.h" type="H" location="/include/"/>
         </Files>
-    </XXXXXXModel>
-    <XXXXXXModel name="Executor" type="atomic" description="an atomic system which executes requests and passes back responses">
+    </Model>
+    <Model name="Executor" type="atomic" description="an atomic system which executes requests and passes back responses">
         <Inputs>
+            <Port name="reqIn" type="Packet" description="requests to access the DB"/>
+            <Port name="dbInPort" type="Packet" description="incoming responses from the DB"/>
         </Inputs>
         <Outputs>
+            <Port name="respOut" type="Packet" description="responses being sent back to the API Gateway"/>
+            <Port name="dbOutPort" type="Packet" description="requests to access the database"/>
+            <Port name="notify" type="Integer" description="signal to the dispatcher that the executor is available"/>
         </Outputs>
         <Files>
             <File name="Executor.h" type="H" location="/include/"/>
         </Files>
-    </XXXXXXModel>
+    </Model>
 </Models>
