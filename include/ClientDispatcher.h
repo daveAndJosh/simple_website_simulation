@@ -63,7 +63,7 @@ namespace sim{
             }
             else{
                 std::stringstream message;
-                message<<"invalid packet: " << front;
+                message<<"invalid packet in "<<id<<": " << front;
                 throw std::runtime_error(message.str());
             }
         }
@@ -72,7 +72,6 @@ namespace sim{
         }
 
     };
-
 
 }
 #endif //MY_SERVERLESS_RECIPE_SITE_SIM_CLIENTDISPATCHER_H

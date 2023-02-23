@@ -62,7 +62,7 @@ namespace sim{
             }
             else{
                 std::stringstream message;
-                message<<"invalid packet: " << front;
+                message<<"invalid packet in: "<<id<<" packet:" << front;
                 throw std::runtime_error(message.str());
             }
         }

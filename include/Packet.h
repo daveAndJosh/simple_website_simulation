@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include <utility>
+#include <memory>
 
 namespace sim{
     enum class PacketType{
@@ -58,7 +59,21 @@ namespace sim{
             type(t),
             dest(std::move(d)),
             source(std::move(s)){}
+
+        Packet& operator=(const Packet& other){
+            if (this == &other)
+                return *this;
+
+           creationTime = other.creationTime;
+           type = other.type;
+           dest = other.dest;
+           source = other.source;
+
+            return *this;
+        }
     };
+
+
 
 
 
