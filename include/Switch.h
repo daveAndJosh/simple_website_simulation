@@ -26,7 +26,7 @@ namespace sim{
         constexpr static char NAME[] = "Switch";
         std::map<std::string, cadmium::BigPort<Packet>> messageOut;
         cadmium::BigPort<Packet> messageIn;
-        Switch(const std::set<std::string>& outputNames): Atomic<SwitchState>(NAME, SwitchState()){
+        explicit Switch(const std::set<std::string>& outputNames): Atomic<SwitchState>(NAME, SwitchState()){
             for(const auto& name: outputNames){
                 addOutPort(name);
             }
@@ -37,7 +37,7 @@ namespace sim{
 
         void addOutPort(const std::string& name){
 
-            const auto& outPort= addOutBigPort<Packet>(name);
+            const auto& outPort= addOutBigPort <Packet> (name);
             messageOut.emplace(name, outPort);
         }
 
