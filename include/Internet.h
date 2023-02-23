@@ -18,7 +18,8 @@ namespace sim {
 
             addIC(client->apiOutPort, cloud->apiRequestFromClient);
             addIC(client->webOutPort, cloud->webRequestFromClient);
-            addIC(cloud->responseToClient, client->webInPort);
+            addIC(cloud->webResponseToClient, client->webInPort);
+            addIC(cloud->apiResponseToClient, client->apiInPort);
 
         }
     };

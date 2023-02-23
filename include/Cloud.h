@@ -14,7 +14,7 @@ namespace sim {
     struct Cloud : public cadmium::Coupled {
 
         cadmium::BigPort<Packet> apiRequestFromClient, webRequestFromClient;
-        cadmium::BigPort<Packet> responseToClient;
+        cadmium::BigPort<Packet> apiResponseToClient, webResponseToClient;
         /**
          * Client
          * @param period the period of how often to send website request messages
@@ -28,19 +28,21 @@ namespace sim {
 
             //make ports
             apiRequestFromClient = addInBigPort<Packet>("API Request in");
+            apiResponseToClient = addOutBigPort<Packet>("API Response out");
             webRequestFromClient = addInBigPort<Packet>("Web Request in");
-            responseToClient = addOutBigPort<Packet>("Client Response Out");
+            webResponseToClient = addOutBigPort<Packet>("Client Response Out");
             //internal couplings
 
             addIC(apiGateway->reqOut, lambda->reqIn);
             addIC(lambda->dbSend, database->reqIn);
             addIC(database->resOut, lambda->dbReceive);
+            addIC(lambda->rspOut, apiGateway->resIn);
 
             //external couplings
             addEIC(apiRequestFromClient, apiGateway->reqIn);
             addEIC(webRequestFromClient, bucket->reqIn);
-
-            addEOC(bucket->resOut, responseToClient);
+            addEOC(apiGateway->resOut, apiResponseToClient);
+            addEOC(bucket->resOut, webResponseToClient);
         }
     };
 }
