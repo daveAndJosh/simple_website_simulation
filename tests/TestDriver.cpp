@@ -21,7 +21,7 @@ int main(){
         const auto& file = test.first;
         const auto& model = test.second;
         auto rootCoordinator = cadmium::RootCoordinator(model);
-        auto logger = std::make_shared<cadmium::CSVLogger>(file+".csv", ";");
+        auto logger = std::make_shared<cadmium::CSVLogger>("../logs/"+file+".csv", ";");
         rootCoordinator.setLogger(logger);
         rootCoordinator.start();
         rootCoordinator.simulate(10000.0);
