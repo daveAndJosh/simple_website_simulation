@@ -46,12 +46,12 @@ namespace sim{
         void output(const DatabaseState& s) const override {
             auto front = s.queue.front();
             if(front.type == PacketType::REQUEST){
-                resOut->addMessage(front.creationTime, PacketType::RESPONSE, NAME, "PAGE");
+                resOut->addMessage(Packet(front.creationTime, PacketType::RESPONSE, id,front.source));
 
             }
             else{
                 std::stringstream message;
-                message<<"invalid packet: " << front;
+                message<<"invalid packet in "<<id<<": " << front;
                 throw std::runtime_error(message.str());
             }
         }

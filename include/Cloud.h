@@ -8,6 +8,7 @@
 #include "Bucket.h"
 #include "Database.h"
 #include "APIGateway.h"
+#include "Lambda.h"
 #include <cadmium/core/modeling/coupled.hpp>
 namespace sim {
     struct Cloud : public cadmium::Coupled {
@@ -21,7 +22,7 @@ namespace sim {
         Cloud(): Coupled("Cloud") {
             auto bucket = addComponent<Bucket>("Bucket");
             auto apiGateway = addComponent<APIGateway>("APIGateway");
-            //auto lambda = addComponent<Lambda>("Lambda");
+            auto lambda = addComponent<Lambda>(2);
             auto database = addComponent<Database>("Database");
 
 
@@ -31,8 +32,9 @@ namespace sim {
             responseToClient = addOutBigPort<Packet>("Client Response Out");
             //internal couplings
 
-            //addIC(apiGateway->reqOut, lambda->reqIn);
-            //addIC(lambda->reqOut, database->reqIn);
+            addIC(apiGateway->reqOut, lambda->reqIn);
+            addIC(lambda->dbSend, database->reqIn);
+            addIC(database->resOut, lambda->dbReceive);
 
             //external couplings
             addEIC(apiRequestFromClient, apiGateway->reqIn);
