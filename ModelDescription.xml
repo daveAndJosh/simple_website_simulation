@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Models>
+    <Model name="Internet" type="coupled" description="a coupled system representing the internet">
+        <Files>
+            <File name="Internet.h" type="H" location="/include/"/>
+            <File name="many.csv" type="CSV" location="/logs/"/>
+            <File name="one.csv" type="CSV" location="/logs/"/>
+        </Files>
+    </Model>
+    <Model name="Client" type="coupled" description="a coupled system representing the client wanting to access a webpage">
+        <Inputs>
+            <Port name="webInPort" type="Packet" description="web Responses coming into the client from the S3 Bucket"/>
+            <Port name="apiInPort" type="Packet" description="api Responses coming into the client from the API Gateway"/>
+        </Inputs>
+        <Outputs>
+            <Port name="webOutPort" type="Packet" description="web Requests being sent from the client to the S3 Bucket"/>
+            <Port name="apiOutPort" type="Packet" description="web Requests being sent from the client to the API Gateway"/>
+        </Outputs>
+        <Files>
+            <File name="Client.h" type="H" location="/include/"/>
+            <File name="ClientTest.csv" type="CSV" location="/logs/"/>
+            <File name="ClientTest.h" type="H" location="/tests/"/>
+            <File name="apiPort.txt" type="TXT" location="/tests/client_test_input/"/>
+            <File name="webPort.txt" type="TXT" location="/tests/client_test_input/"/>
+
+        </Files>
+    </Model>
+    <Model name="Cloud" type="coupled" description="a coupled system representing the cloud">
+        <Inputs>
+            <Port name="webRequestFromClient" type="Packet" description="web requests coming into the S3 bucket"/>
+            <Port name="apiRequestFromClient" type="Packet" description="web requests coming into the API Gateway"/>
+        </Inputs>
+        <Outputs>
+            <Port name="apiResponseToClient" type="Packet" description="Responses being sent from the API Gateway to the client"/>
+            <Port name="webResponseToClient" type="Packet" description="Responses being sent from the bucket to the client"/>
+        </Outputs>
+        <Files>
+            <File name="Cloud.h" type="H" location="/include/"/>
+            <File name="CloudTest.csv" type="CSV" location="/logs/"/>
+            <File name="CloudTest.h" type="H" location="/tests/"/>
+            <File name="apiPort.txt" type="TXT" location="/tests/cloud_test_input/"/>
+            <File name="webPort.txt" type="TXT" location="/tests/cloud_test_input/"/>
+        </Files>
+    </Model>
+    <Model name="Lambda" type="coupled" description="a coupled system representing the lambda">
+        <Inputs>
+            <Port name="dbReceive" type="Packet" description="incoming responses from the Database"/>
+            <Port name="reqIn" type="Packet" description="incoming web requests from the API Gateway"/>
+        </Inputs>
+        <Outputs>
+            <Port name="dbSend" type="Packet" description="web requests being sent to the Database"/>
+            <Port name="rspOut" type="Packet" description="web responses being sent back"/>
+        </Outputs>
+        <Files>
+            <File name="Lambda.h" type="H" location="/include/"/>
+            <File name="LambdaTest.csv" type="CSV" location="/logs/"/>
+            <File name="LambdaTest.h" type="H" location="/tests/"/>
+            <File name="apiPort.txt" type="TXT" location="/tests/lambda_test_input/"/>
+            <File name="dbPort.txt" type="TXT" location="/tests/lambda_test_input/"/>
+        </Files>
+    </Model>
+    <Model name="ClientGenerator" type="atomic" description="an atomic system which generates messages to be sent to the S3 Bucket">
+        <Outputs>
+            <Port name="webRequestPort" type="Packet" description="sends Web Requests to the dispatcher"/>
+        </Outputs>
+        <Files>
+            <File name="ClientGenerator.h" type="H" location="/include/"/>
+            <File name="generatorTest.csv" type="CSV" location="/logs/"/>
+            <File name="GeneratorTestTest.h" type="H" location="/tests/"/>
+        </Files>
+    </Model>
+    <Model name="ClientDispatcher" type="atomic" description="an atomic system which dispatches client requests to either the S3 Bucket or the API Gateway">
+        <Inputs>
+            <Port name="in" type="Packet" description="web packets which are to be sent to the Bucket or to the API Gateway"/>
+        </Inputs>
+        <Outputs>
+            <Port name="pageOut" type="Packet" description="web requests being sent from the client to the S3 Bucket"/>
+            <Port name="apiOut" type="Packet" description="web requests being sent from the client to the API Gateway"/>
+        </Outputs>
+        <Files>
+            <File name="ClientDispatcher.h" type="H" location="/include/"/>
+            <File name="ClientDispatcherTest.csv" type="CSV" location="/logs/"/>
+            <File name="ClientDispatcherTest.h" type="H" location="/tests/"/>
+            <File name="ClientDispatcherData.txt" type="TXT" location="/tests/"/>
+        </Files>
+    </Model>
+    <Model name="Packet Counter" type="atomic" description="an atomic system which recieves packets and increments">
+        <Inputs>
+            <Port name="packetInputPort" type="Packet" description="incoming packets to increment"/>
+        </Inputs>
+        <Files>
+            <File name="PacketCounter.h" type="H" location="/include/"/>
+            <File name="counterTest.csv" type="CSV" location="/logs/"/>
+            <File name="CounterTest.h" type="H" location="/tests/"/>
+            <File name="CounterTestData.txt" type="TXT" location="/tests/"/>
+        </Files>
+    </Model>
+    <Model name="S3 Bucket" type="atomic" description="an atomic system which takes in client requests and generates a response">
+        <Inputs>
+            <Port name="reqIn" type="Packet" description="web requests to access a page, which a response is generated for"/>
+        </Inputs>
+        <Outputs>
+            <Port name="resOut" type="Packet" description="web responses sent back to the client after receiving a request"/>
+        </Outputs>
+        <Files>
+            <File name="Bucket.h" type="H" location="/include/"/>
+            <File name="BucketTest.csv" type="CSV" location="/logs/"/>
+            <File name="BucketTest.h" type="H" location="/tests/"/>
+            <File name="BucketData.txt" type="TXT" location="/tests/"/>
+        </Files>
+    </Model>
+    <Model name="REST API Gateway" type="atomic" description="an atomic system which forwards responses and requests between the lambda and the client">
+        <Inputs>
+            <Port name="reqIn" type="Packet" description="incoming web requests from the client"/>
+            <Port name="resIn" type="Packet" description="incoming web responses from the lambda"/>
+        </Inputs>
+        <Outputs>
+            <Port name="reqOut" type="Packet" description="web requests being sent to the lambda"/>
+            <Port name="resOut" type="Packet" description="web responses being sent to the client"/>
+        </Outputs>
+        <Files>
+            <File name="APIGateway.h" type="H" location="/include/"/>
+            <File name="APIGatewayTest.csv" type="CSV" location="/logs/"/>
+            <File name="APIGatewayTest.h" type="H" location="/tests/"/>
+            <File name="APIRequestInputData.txt" type="TXT" location="/tests/api_gateway_test_input/"/>
+            <File name="APIResponseInputData.txt" type="TXT" location="/tests/api_gateway_test_input/"/>
+        </Files>
+    </Model>
+    <Model name="Switch" type="atomic" description="an atomic system which acts as a switch between the lambda and database">
+        <Inputs>
+            <Port name="messageIn" type="Packet" description="oncoming messages"/>
+        </Inputs>
+        <Outputs>
+            <Port name="database" type="Packet" description="output to the database"/>
+            <Port name="messageOut" type="Packet" description="dynamic outputs to executors and db"/>
+        </Outputs>
+        <Files>
+            <File name="Switch.h" type="H" location="/include/"/>
+            <File name="SwitchTest.csv" type="CSV" location="/logs/"/>
+            <File name="SwitchTest.h" type="H" location="/tests/"/>
+            <File name="SwitchTestData.txt" type="TXT" location="/tests/Switch_test_input/"/>
+        </Files>
+    </Model>
+    <Model name="Database" type="atomic" description="an atomic system which takes in lambda requests and generates a response">
+        <Inputs>
+            <Port name="reqIn" type="Packet" description="requests to access from the database"/>
+        </Inputs>
+        <Outputs>
+            <Port name="resOut" type="Packet" description="responses from the database being sent to the lambda"/>
+        </Outputs>
+        <Files>
+            <File name="Database.h" type="H" location="/include/"/>
+            <File name="DatabaseTest.csv" type="CSV" location="/logs/"/>
+            <File name="DatabaseTest.h" type="H" location="/tests/"/>
+            <File name="DatabaseTest.txt" type="TXT" location="/tests/"/>
+        </Files>
+    </Model>
+    <Model name="Lambda Dispatcher" type="atomic" description="an atomic system which dispatches Database requests to the proper executor">
+        <Inputs>
+            <Port name="isReadyPort" type="String" description="messages from the executor that they are ready to receive"/>
+            <Port name="queueIn" type="Packet" description="incoming requests which need to be processed"/>
+        </Inputs>
+        <Outputs>
+            <Port name="execPorts" type="Packet" description="outgoing requests to executors"/>
+        </Outputs>
+        <Files>
+            <File name="LambdaDispatcher.h" type="H" location="/include/"/>
+            <File name="LambdaDispatcherTest.csv" type="CSV" location="/logs/"/>
+            <File name="LambdaDispatcherTest.h" type="H" location="/tests/"/>
+            <File name="inPort.txt" type="TXT" location="/tests/lambda_dispatcher_test_input/"/>
+            <File name="isReadyPort.txt" type="TXT" location="/tests/lambda_dispatcher_test_input/"/>
+        </Files>
+    </Model>
+    <Model name="Executor" type="atomic" description="an atomic system which executes requests and passes back responses">
+        <Inputs>
+            <Port name="reqIn" type="Packet" description="requests to access the DB"/>
+            <Port name="dbIn" type="Packet" description="incoming responses from the DB"/>
+        </Inputs>
+        <Outputs>
+            <Port name="respOut" type="Packet" description="responses being sent back to the API Gateway"/>
+            <Port name="dbOut" type="Packet" description="requests to access the database"/>
+            <Port name="notify" type="String" description="signal to the dispatcher that the executor is available"/>
+        </Outputs>
+        <Files>
+            <File name="Executor.h" type="H" location="/include/"/>
+            <File name="ExecutorTest.csv" type="CSV" location="/logs/"/>
+            <File name="ExecutorTest.h" type="H" location="/tests/"/>
+            <File name="apiPort.txt" type="TXT" location="/tests/executor_test_input/"/>
+            <File name="dbPort.txt" type="TXT" location="/tests/executor_test_input/"/>
+        </Files>
+    </Model>
+</Models>
