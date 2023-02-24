@@ -56,7 +56,7 @@ namespace sim{
         void output(const SwitchState& s) const override {
             auto msg = s.queue.front();
             if(!messageOut.count(msg.dest)){
-                throw std::runtime_error("invalid destination");
+                throw std::runtime_error("invalid destination:"+msg.dest);
             }
             messageOut.at(msg.dest)->addMessage(msg);
         }

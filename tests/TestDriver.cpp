@@ -14,6 +14,7 @@
 #include "DatabaseTest.h"
 #include "LambdaDispatcherTest.h"
 #include "SwitchTest.h"
+#include "LambdaTest.h"
 using namespace std;
 using namespace sim;
 
@@ -29,6 +30,7 @@ int main(){
         std::make_pair("DatabaseTest",std::make_shared<test::DatabaseTest>()),
         std::make_pair("LambdaDispatcherTest",std::make_shared<test::LambdaDispatcherTest>()),
         std::make_pair("SwitchTest",std::make_shared<test::SwitchTest>()),
+        std::make_pair("LambdaTest", std::make_shared<test::LambdaTest>()),
     };
 
     for(const auto& test: tests){
