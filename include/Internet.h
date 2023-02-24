@@ -12,9 +12,9 @@ namespace sim {
          *
          * @param id
          */
-        Internet(const std::string& id, const double sendPeriod): Coupled(id) {
+        Internet(const std::string& id, const double sendPeriod, int j): Coupled(id) {
             auto client = addComponent<Client>(sendPeriod);
-            auto cloud = addComponent<Cloud>();
+            auto cloud = addComponent<Cloud>(j);
 
             addIC(client->apiOutPort, cloud->apiRequestFromClient);
             addIC(client->webOutPort, cloud->webRequestFromClient);

@@ -19,6 +19,31 @@ namespace sim {
          * Client
          * @param period the period of how often to send website request messages
          */
+        Cloud(int j): Coupled("Cloud") {
+            auto bucket = addComponent<Bucket>("Bucket");
+            auto apiGateway = addComponent<APIGateway>("APIGateway");
+            auto lambda = addComponent<Lambda>(j);
+            auto database = addComponent<Database>("Database");
+
+
+            //make ports
+            apiRequestFromClient = addInBigPort<Packet>("API Request in");
+            apiResponseToClient = addOutBigPort<Packet>("API Response out");
+            webRequestFromClient = addInBigPort<Packet>("Web Request in");
+            webResponseToClient = addOutBigPort<Packet>("Client Response Out");
+            //internal couplings
+
+            addIC(apiGateway->reqOut, lambda->reqIn);
+            addIC(lambda->dbSend, database->reqIn);
+            addIC(database->resOut, lambda->dbReceive);
+            addIC(lambda->rspOut, apiGateway->resIn);
+
+            //external couplings
+            addEIC(apiRequestFromClient, apiGateway->reqIn);
+            addEIC(webRequestFromClient, bucket->reqIn);
+            addEOC(apiGateway->resOut, apiResponseToClient);
+            addEOC(bucket->resOut, webResponseToClient);
+        }
         Cloud(): Coupled("Cloud") {
             auto bucket = addComponent<Bucket>("Bucket");
             auto apiGateway = addComponent<APIGateway>("APIGateway");
