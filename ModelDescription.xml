@@ -3,6 +3,8 @@
     <Model name="Internet" type="coupled" description="a coupled system representing the internet">
         <Files>
             <File name="Internet.h" type="H" location="/include/"/>
+            <File name="many.csv" type="CSV" location="/logs/"/>
+            <File name="one.csv" type="CSV" location="/logs/"/>
         </Files>
     </Model>
     <Model name="Client" type="coupled" description="a coupled system representing the client wanting to access a webpage">
@@ -16,6 +18,11 @@
         </Outputs>
         <Files>
             <File name="Client.h" type="H" location="/include/"/>
+            <File name="ClientTest.csv" type="CSV" location="/logs/"/>
+            <File name="ClientTest.h" type="H" location="/tests/"/>
+            <File name="apiPort.txt" type="TXT" location="/tests/client_test_input/"/>
+            <File name="webPort.txt" type="TXT" location="/tests/client_test_input/"/>
+
         </Files>
     </Model>
     <Model name="Cloud" type="coupled" description="a coupled system representing the cloud">
@@ -29,6 +36,10 @@
         </Outputs>
         <Files>
             <File name="Cloud.h" type="H" location="/include/"/>
+            <File name="CloudTest.csv" type="CSV" location="/logs/"/>
+            <File name="CloudTest.h" type="H" location="/tests/"/>
+            <File name="apiPort.txt" type="TXT" location="/tests/cloud_test_input/"/>
+            <File name="webPort.txt" type="TXT" location="/tests/cloud_test_input/"/>
         </Files>
     </Model>
     <Model name="Lambda" type="coupled" description="a coupled system representing the lambda">
@@ -42,6 +53,10 @@
         </Outputs>
         <Files>
             <File name="Lambda.h" type="H" location="/include/"/>
+            <File name="LambdaTest.csv" type="CSV" location="/logs/"/>
+            <File name="LambdaTest.h" type="H" location="/tests/"/>
+            <File name="apiPort.txt" type="TXT" location="/tests/lambda_test_input/"/>
+            <File name="dbPort.txt" type="TXT" location="/tests/lambda_test_input/"/>
         </Files>
     </Model>
     <Model name="ClientGenerator" type="atomic" description="an atomic system which generates messages to be sent to the S3 Bucket">
@@ -50,6 +65,8 @@
         </Outputs>
         <Files>
             <File name="ClientGenerator.h" type="H" location="/include/"/>
+            <File name="generatorTest.csv" type="CSV" location="/logs/"/>
+            <File name="GeneratorTestTest.h" type="H" location="/tests/"/>
         </Files>
     </Model>
     <Model name="ClientDispatcher" type="atomic" description="an atomic system which dispatches client requests to either the S3 Bucket or the API Gateway">
@@ -62,6 +79,9 @@
         </Outputs>
         <Files>
             <File name="ClientDispatcher.h" type="H" location="/include/"/>
+            <File name="ClientDispatcherTest.csv" type="CSV" location="/logs/"/>
+            <File name="ClientDispatcherTest.h" type="H" location="/tests/"/>
+            <File name="ClientDispatcherData.txt" type="TXT" location="/tests/"/>
         </Files>
     </Model>
     <Model name="Packet Counter" type="atomic" description="an atomic system which recieves packets and increments">
@@ -70,6 +90,9 @@
         </Inputs>
         <Files>
             <File name="PacketCounter.h" type="H" location="/include/"/>
+            <File name="counterTest.csv" type="CSV" location="/logs/"/>
+            <File name="CounterTest.h" type="H" location="/tests/"/>
+            <File name="CounterTestData.txt" type="TXT" location="/tests/"/>
         </Files>
     </Model>
     <Model name="S3 Bucket" type="atomic" description="an atomic system which takes in client requests and generates a response">
@@ -81,6 +104,9 @@
         </Outputs>
         <Files>
             <File name="Bucket.h" type="H" location="/include/"/>
+            <File name="BucketTest.csv" type="CSV" location="/logs/"/>
+            <File name="BucketTest.h" type="H" location="/tests/"/>
+            <File name="BucketData.txt" type="TXT" location="/tests/"/>
         </Files>
     </Model>
     <Model name="REST API Gateway" type="atomic" description="an atomic system which forwards responses and requests between the lambda and the client">
@@ -94,6 +120,10 @@
         </Outputs>
         <Files>
             <File name="APIGateway.h" type="H" location="/include/"/>
+            <File name="APIGatewayTest.csv" type="CSV" location="/logs/"/>
+            <File name="APIGatewayTest.h" type="H" location="/tests/"/>
+            <File name="APIRequestInputData.txt" type="TXT" location="/tests/api_gateway_test_input/"/>
+            <File name="APIResponseInputData.txt" type="TXT" location="/tests/api_gateway_test_input/"/>
         </Files>
     </Model>
     <Model name="Switch" type="atomic" description="an atomic system which acts as a switch between the lambda and database">
@@ -108,6 +138,9 @@
         </Outputs>
         <Files>
             <File name="Switch.h" type="H" location="/include/"/>
+            <File name="SwitchTest.csv" type="CSV" location="/logs/"/>
+            <File name="SwitchTest.h" type="H" location="/tests/"/>
+            <File name="SwitchTestData.txt" type="TXT" location="/tests/Switch_test_input/"/>
         </Files>
     </Model>
     <Model name="Database" type="atomic" description="an atomic system which takes in lambda requests and generates a response">
@@ -119,6 +152,9 @@
         </Outputs>
         <Files>
             <File name="Database.h" type="H" location="/include/"/>
+            <File name="DatabaseTest.csv" type="CSV" location="/logs/"/>
+            <File name="DatabaseTest.h" type="H" location="/tests/"/>
+            <File name="DatabaseTest.txt" type="TXT" location="/tests/"/>
         </Files>
     </Model>
     <Model name="Lambda Dispatcher" type="atomic" description="an atomic system which dispatches Database requests to the proper executor">
@@ -133,6 +169,10 @@
         </Outputs>
         <Files>
             <File name="LambdaDispatcher.h" type="H" location="/include/"/>
+            <File name="LambdaDispatcherTest.csv" type="CSV" location="/logs/"/>
+            <File name="LambdaDispatcherTest.h" type="H" location="/tests/"/>
+            <File name="inPort.txt" type="TXT" location="/tests/lambda_dispatcher_test_input/"/>
+            <File name="isReadyPort.txt" type="TXT" location="/tests/lambda_dispatcher_test_input/"/>
         </Files>
     </Model>
     <Model name="Executor" type="atomic" description="an atomic system which executes requests and passes back responses">
@@ -147,6 +187,10 @@
         </Outputs>
         <Files>
             <File name="Executor.h" type="H" location="/include/"/>
+            <File name="ExecutorTest.csv" type="CSV" location="/logs/"/>
+            <File name="ExecutorTest.h" type="H" location="/tests/"/>
+            <File name="apiPort.txt" type="TXT" location="/tests/executor_test_input/"/>
+            <File name="dbPort.txt" type="TXT" location="/tests/executor_test_input/"/>
         </Files>
     </Model>
 </Models>
