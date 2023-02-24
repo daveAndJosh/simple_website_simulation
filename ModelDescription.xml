@@ -132,9 +132,7 @@
         </Inputs>
         <Outputs>
             <Port name="database" type="Packet" description="output to the database"/>
-            <Port name="messageOut_1" type="Packet" description="output to executor 1"/>
-            <Port name="messageOut_2" type="Packet" description="output to executor 2"/>
-            <Port name="messageOut_3" type="Packet" description="output to executor 3"/>
+            <Port name="messageOut" type="Packet" description="dynamic outputs to executors and db"/>
         </Outputs>
         <Files>
             <File name="Switch.h" type="H" location="/include/"/>
@@ -159,13 +157,11 @@
     </Model>
     <Model name="Lambda Dispatcher" type="atomic" description="an atomic system which dispatches Database requests to the proper executor">
         <Inputs>
-            <Port name="isReadyPort" type="Integer" description="messages from the executor that they are ready to receive"/>
+            <Port name="isReadyPort" type="String" description="messages from the executor that they are ready to receive"/>
             <Port name="queueIn" type="Packet" description="incoming requests which need to be processed"/>
         </Inputs>
         <Outputs>
-            <Port name="execPort_1" type="Packet" description="outgoing requests to executor 1"/>
-            <Port name="execPort_2" type="Packet" description="outgoing requests to executor 2"/>
-            <Port name="execPort_3" type="Packet" description="outgoing requests to executor 3"/>
+            <Port name="execPorts" type="Packet" description="outgoing requests to executors"/>
         </Outputs>
         <Files>
             <File name="LambdaDispatcher.h" type="H" location="/include/"/>
@@ -178,12 +174,12 @@
     <Model name="Executor" type="atomic" description="an atomic system which executes requests and passes back responses">
         <Inputs>
             <Port name="reqIn" type="Packet" description="requests to access the DB"/>
-            <Port name="dbInPort" type="Packet" description="incoming responses from the DB"/>
+            <Port name="dbIn" type="Packet" description="incoming responses from the DB"/>
         </Inputs>
         <Outputs>
             <Port name="respOut" type="Packet" description="responses being sent back to the API Gateway"/>
-            <Port name="dbOutPort" type="Packet" description="requests to access the database"/>
-            <Port name="notify" type="Integer" description="signal to the dispatcher that the executor is available"/>
+            <Port name="dbOut" type="Packet" description="requests to access the database"/>
+            <Port name="notify" type="String" description="signal to the dispatcher that the executor is available"/>
         </Outputs>
         <Files>
             <File name="Executor.h" type="H" location="/include/"/>
