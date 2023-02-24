@@ -4,6 +4,8 @@
 #include <ostream>
 #include <utility>
 #include <memory>
+#include <sstream>
+#include <algorithm>
 
 namespace sim{
     enum class PacketType{
@@ -74,8 +76,21 @@ namespace sim{
     };
 
 
-
-
+    std::istream& operator>> (std::istream& is, Packet& packet){
+        unsigned int bruh;
+        std::string s;
+        is>>s;
+        s=s.erase(0,1).erase(s.size()-1,1); //remove brackets
+        std::replace(s.begin(),s.end(), ',',' '); //replace commas with spaces
+        //deserialize
+        std::stringstream ss(s);
+        ss>>packet.creationTime;
+        ss>>bruh;
+        ss>>packet.source;
+        ss>>packet.dest;
+        packet.type = static_cast<PacketType>(bruh);
+        return is;
+    }
 
     std::ostream& operator<<(std::ostream& out, const Packet& packet){
         out

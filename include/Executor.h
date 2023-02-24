@@ -86,7 +86,7 @@ public:
                 return 1.00;
             case ExecutorState::Status::WAITING:
                 return std::numeric_limits<double>::infinity();
-            case ExecutorState::Status::COMPUTING:
+            default:
                 return 2.00;
         }
     }

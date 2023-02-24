@@ -6,7 +6,7 @@ using namespace sim;
 int main() {
     auto model = std::make_shared<Internet>("Internet", 5);
     auto rootCoordinator = cadmium::RootCoordinator(model);
-    auto logger = std::make_shared<cadmium::CSVLogger>("log.csv", ";");
+    auto logger = std::make_shared<cadmium::CSVLogger>("../logs/log.csv", ";");
     rootCoordinator.setLogger(logger);
     rootCoordinator.start();
     rootCoordinator.simulate(10000.0);
