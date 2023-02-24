@@ -1,0 +1,34 @@
+time;model_id;model_name;port_name;data
+0;1;MockClient;;5
+0;2;MockLambda;;5
+0;3;apiGateway;;{r: inf queue_size:0}
+5;1;MockClient;out;{Type:REQUEST, CreationTime:5, Source:source, Dest:dest}
+5;1;MockClient;;1
+5;2;MockLambda;out;{Type:RESPONSE, CreationTime:5, Source:source, Dest:dest}
+5;2;MockLambda;;1
+5;3;apiGateway;;{r: 0.001 queue_size:2}
+5.001;3;apiGateway;resOut;{Type:RESPONSE, CreationTime:5, Source:source, Dest:dest}
+5.001;3;apiGateway;;{r: 0.001 queue_size:1}
+5.002;3;apiGateway;reqOut;{Type:REQUEST, CreationTime:5, Source:source, Dest:dest}
+5.002;3;apiGateway;;{r: inf queue_size:0}
+6;1;MockClient;out;{Type:REQUEST, CreationTime:6, Source:source, Dest:dest}
+6;1;MockClient;;0
+6;2;MockLambda;out;{Type:RESPONSE, CreationTime:6, Source:source, Dest:dest}
+6;2;MockLambda;;0
+6;3;apiGateway;;{r: 0.001 queue_size:2}
+6;1;MockClient;out;{Type:REQUEST, CreationTime:6, Source:source, Dest:dest}
+6;1;MockClient;;inf
+6;2;MockLambda;out;{Type:RESPONSE, CreationTime:6, Source:source, Dest:dest}
+6;2;MockLambda;;inf
+6;3;apiGateway;;{r: 0.001 queue_size:4}
+6.001;3;apiGateway;resOut;{Type:RESPONSE, CreationTime:6, Source:source, Dest:dest}
+6.001;3;apiGateway;;{r: 0.001 queue_size:3}
+6.002;3;apiGateway;reqOut;{Type:REQUEST, CreationTime:6, Source:source, Dest:dest}
+6.002;3;apiGateway;;{r: 0.001 queue_size:2}
+6.003;3;apiGateway;resOut;{Type:RESPONSE, CreationTime:6, Source:source, Dest:dest}
+6.003;3;apiGateway;;{r: 0.001 queue_size:1}
+6.004;3;apiGateway;reqOut;{Type:REQUEST, CreationTime:6, Source:source, Dest:dest}
+6.004;3;apiGateway;;{r: inf queue_size:0}
+6.004;1;MockClient;;inf
+6.004;2;MockLambda;;inf
+6.004;3;apiGateway;;{r: inf queue_size:0}

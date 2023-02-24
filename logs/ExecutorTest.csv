@@ -1,0 +1,31 @@
+time;model_id;model_name;port_name;data
+0;1;MockDB;;30
+0;2;MockAPI;;2
+0;3;Executor;;{state: SLEEPING}
+2;2;MockAPI;out;{Type:REQUEST, CreationTime:2, Source:client, Dest:api}
+2;2;MockAPI;;98
+2;3;Executor;;{state: WAKING_UP}
+5;3;Executor;;{state: PARSING}
+6;3;Executor;Database Out;{Type:REQUEST, CreationTime:2, Source:Executor, Dest:Database}
+6;3;Executor;;{state: WAITING}
+30;1;MockDB;out;{Type:RESPONSE, CreationTime:30, Source:database, Dest:lambda}
+30;1;MockDB;;130
+30;3;Executor;;{state: COMPUTING}
+32;3;Executor;Response Out;{Type:RESPONSE, CreationTime:2, Source:Executor, Dest:JavaScript endpoint}
+32;3;Executor;Notify port;Executor
+32;3;Executor;;{state: SLEEPING}
+100;2;MockAPI;out;{Type:REQUEST, CreationTime:100, Source:client, Dest:api}
+100;2;MockAPI;;inf
+100;3;Executor;;{state: WAKING_UP}
+103;3;Executor;;{state: PARSING}
+104;3;Executor;Database Out;{Type:REQUEST, CreationTime:100, Source:Executor, Dest:Database}
+104;3;Executor;;{state: WAITING}
+160;1;MockDB;out;{Type:RESPONSE, CreationTime:60, Source:database, Dest:lambda}
+160;1;MockDB;;inf
+160;3;Executor;;{state: COMPUTING}
+162;3;Executor;Response Out;{Type:RESPONSE, CreationTime:100, Source:Executor, Dest:JavaScript endpoint}
+162;3;Executor;Notify port;Executor
+162;3;Executor;;{state: SLEEPING}
+162;1;MockDB;;inf
+162;2;MockAPI;;inf
+162;3;Executor;;{state: SLEEPING}

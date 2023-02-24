@@ -1,0 +1,15 @@
+time;model_id;model_name;port_name;data
+0;1;Mock;;4
+0;2;dispatcher;;{r: inf queue_size:0}
+4;1;Mock;out;{Type:RESPONSE, CreationTime:4, Source:bucket, Dest:BROWSER}
+4;1;Mock;;1
+4;2;dispatcher;;{r: 0.001 queue_size:1}
+4.001;2;dispatcher;apiOut;{Type:REQUEST, CreationTime:4, Source:BROWSER, Dest:API}
+4.001;2;dispatcher;;{r: inf queue_size:0}
+5;1;Mock;out;{Type:REQUEST, CreationTime:5, Source:generator, Dest:PAGE}
+5;1;Mock;;inf
+5;2;dispatcher;;{r: 0.001 queue_size:1}
+5.001;2;dispatcher;pageOut;{Type:REQUEST, CreationTime:5, Source:generator, Dest:PAGE}
+5.001;2;dispatcher;;{r: inf queue_size:0}
+5.001;1;Mock;;inf
+5.001;2;dispatcher;;{r: inf queue_size:0}

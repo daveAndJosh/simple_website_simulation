@@ -1,0 +1,25 @@
+time;model_id;model_name;port_name;data
+0;1;Mock;;4
+0;2;bucket;;{r: inf queue_size:0}
+4;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+4;1;Mock;;1
+4;2;bucket;;{r: 0.01 queue_size:1}
+4.01;2;bucket;resOut;{Type:RESPONSE, CreationTime:4, Source:BUCKET, Dest:BROWSER}
+4.01;2;bucket;;{r: inf queue_size:0}
+5;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+5;1;Mock;;0
+5;2;bucket;;{r: 0.01 queue_size:1}
+5;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+5;1;Mock;;2
+5;2;bucket;;{r: 0.01 queue_size:2}
+5.01;2;bucket;resOut;{Type:RESPONSE, CreationTime:4, Source:BUCKET, Dest:BROWSER}
+5.01;2;bucket;;{r: 0.01 queue_size:1}
+5.02;2;bucket;resOut;{Type:RESPONSE, CreationTime:4, Source:BUCKET, Dest:BROWSER}
+5.02;2;bucket;;{r: inf queue_size:0}
+7;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+7;1;Mock;;inf
+7;2;bucket;;{r: 0.01 queue_size:1}
+7.01;2;bucket;resOut;{Type:RESPONSE, CreationTime:4, Source:BUCKET, Dest:BROWSER}
+7.01;2;bucket;;{r: inf queue_size:0}
+7.01;1;Mock;;inf
+7.01;2;bucket;;{r: inf queue_size:0}

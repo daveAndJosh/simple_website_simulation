@@ -1,0 +1,50 @@
+time;model_id;model_name;port_name;data
+0;1;MockQueueIn;;2
+0;2;MockIsReady;;20
+0;3;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['Available', 'Available']}
+2;1;MockQueueIn;out;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+2;1;MockQueueIn;;0
+2;3;LambdaDispatch;;{r: 0.01, queue_size:1, state: WORKING, Execs: ['Available', 'Available']}
+2;1;MockQueueIn;out;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+2;1;MockQueueIn;;0
+2;3;LambdaDispatch;;{r: 0.01, queue_size:2, state: WORKING, Execs: ['Available', 'Available']}
+2;1;MockQueueIn;out;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+2;1;MockQueueIn;;0
+2;3;LambdaDispatch;;{r: 0.01, queue_size:3, state: WORKING, Execs: ['Available', 'Available']}
+2;1;MockQueueIn;out;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+2;1;MockQueueIn;;0
+2;3;LambdaDispatch;;{r: 0.01, queue_size:4, state: WORKING, Execs: ['Available', 'Available']}
+2;1;MockQueueIn;out;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+2;1;MockQueueIn;;inf
+2;3;LambdaDispatch;;{r: 0.01, queue_size:5, state: WORKING, Execs: ['Available', 'Available']}
+2.01;3;LambdaDispatch;exec1;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+2.01;3;LambdaDispatch;;{r: 0.01, queue_size:4, state: WORKING, Execs: ['In Use', 'Available']}
+2.02;3;LambdaDispatch;exec2;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+2.02;3;LambdaDispatch;;{r: inf, queue_size:3, state: BLOCKED, Execs: ['In Use', 'In Use']}
+20;2;MockIsReady;out;exec1
+20;2;MockIsReady;;20
+20;3;LambdaDispatch;;{r: 0.01, queue_size:3, state: WORKING, Execs: ['Available', 'In Use']}
+20.01;3;LambdaDispatch;exec1;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+20.01;3;LambdaDispatch;;{r: inf, queue_size:2, state: BLOCKED, Execs: ['In Use', 'In Use']}
+40;2;MockIsReady;out;exec1
+40;2;MockIsReady;;10
+40;3;LambdaDispatch;;{r: 0.01, queue_size:2, state: WORKING, Execs: ['Available', 'In Use']}
+40.01;3;LambdaDispatch;exec1;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+40.01;3;LambdaDispatch;;{r: inf, queue_size:1, state: BLOCKED, Execs: ['In Use', 'In Use']}
+50;2;MockIsReady;out;exec2
+50;2;MockIsReady;;10
+50;3;LambdaDispatch;;{r: 0.01, queue_size:1, state: WORKING, Execs: ['In Use', 'Available']}
+50.01;3;LambdaDispatch;exec2;{Type:REQUEST, CreationTime:2, Source:api, Dest:lambda}
+50.01;3;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['In Use', 'In Use']}
+60;2;MockIsReady;out;exec1
+60;2;MockIsReady;;10
+60;3;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['Available', 'In Use']}
+70;2;MockIsReady;out;exec1
+70;2;MockIsReady;;20
+70;3;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['Available', 'In Use']}
+90;2;MockIsReady;out;exec2
+90;2;MockIsReady;;inf
+90;3;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['Available', 'Available']}
+90;1;MockQueueIn;;inf
+90;2;MockIsReady;;inf
+90;3;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['Available', 'Available']}

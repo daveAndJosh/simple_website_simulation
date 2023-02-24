@@ -1,0 +1,23 @@
+time;model_id;model_name;port_name;data
+0;1;Mock;;4
+0;2;COUNTER;;{packets_received: 0}
+4;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+4;1;Mock;;1
+4;2;COUNTER;;{packets_received: 1}
+5;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+5;1;Mock;;1
+5;2;COUNTER;;{packets_received: 2}
+6;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+6;1;Mock;;1
+6;2;COUNTER;;{packets_received: 3}
+7;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+7;1;Mock;;1
+7;2;COUNTER;;{packets_received: 4}
+8;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+8;1;Mock;;0
+8;2;COUNTER;;{packets_received: 5}
+8;1;Mock;out;{Type:REQUEST, CreationTime:4, Source:source, Dest:dest}
+8;1;Mock;;inf
+8;2;COUNTER;;{packets_received: 6}
+8;1;Mock;;inf
+8;2;COUNTER;;{packets_received: 6}

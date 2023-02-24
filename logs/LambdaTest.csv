@@ -1,0 +1,99 @@
+time;model_id;model_name;port_name;data
+0;1;MockDb;;30
+0;2;MockAPI;;4
+0;4;Switch;;{queue_size:0}
+0;5;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['Available']}
+0;6;Executor0;;{state: SLEEPING}
+4;2;MockAPI;out;{Type:REQUEST, CreationTime:4, Source:BROWSER, Dest:Lambda}
+4;2;MockAPI;;1.1
+4;5;LambdaDispatch;;{r: 0.01, queue_size:1, state: WORKING, Execs: ['Available']}
+4.01;5;LambdaDispatch;Executor0;{Type:REQUEST, CreationTime:4, Source:BROWSER, Dest:Lambda}
+4.01;5;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['In Use']}
+4.01;6;Executor0;;{state: WAKING_UP}
+5.1;2;MockAPI;out;{Type:REQUEST, CreationTime:5, Source:BROWSER, Dest:Lambda}
+5.1;2;MockAPI;;0.9
+5.1;5;LambdaDispatch;;{r: inf, queue_size:1, state: BLOCKED, Execs: ['In Use']}
+6;2;MockAPI;out;{Type:REQUEST, CreationTime:6, Source:BROWSER, Dest:Lambda}
+6;2;MockAPI;;1
+6;5;LambdaDispatch;;{r: inf, queue_size:2, state: BLOCKED, Execs: ['In Use']}
+7;2;MockAPI;out;{Type:REQUEST, CreationTime:7, Source:BROWSER, Dest:Lambda}
+7;2;MockAPI;;inf
+7;5;LambdaDispatch;;{r: inf, queue_size:3, state: BLOCKED, Execs: ['In Use']}
+7.01;6;Executor0;;{state: PARSING}
+8.01;4;Switch;;{queue_size:1}
+8.01;6;Executor0;Database Out;{Type:REQUEST, CreationTime:4, Source:Executor0, Dest:Database}
+8.01;6;Executor0;;{state: WAITING}
+8.01;4;Switch;Database;{Type:REQUEST, CreationTime:4, Source:Executor0, Dest:Database}
+8.01;4;Switch;;{queue_size:0}
+30;1;MockDb;out;{Type:RESPONSE, CreationTime:3, Source:Database, Dest:Executor0}
+30;1;MockDb;;10
+30;4;Switch;;{queue_size:1}
+30;4;Switch;Executor0;{Type:RESPONSE, CreationTime:3, Source:Database, Dest:Executor0}
+30;4;Switch;;{queue_size:0}
+30;6;Executor0;;{state: COMPUTING}
+32;5;LambdaDispatch;;{r: 0.01, queue_size:3, state: WORKING, Execs: ['Available']}
+32;6;Executor0;Response Out;{Type:RESPONSE, CreationTime:4, Source:Executor0, Dest:JavaScript endpoint}
+32;6;Executor0;Notify port;Executor0
+32;6;Executor0;;{state: SLEEPING}
+32.01;5;LambdaDispatch;Executor0;{Type:REQUEST, CreationTime:5, Source:BROWSER, Dest:Lambda}
+32.01;5;LambdaDispatch;;{r: inf, queue_size:2, state: BLOCKED, Execs: ['In Use']}
+32.01;6;Executor0;;{state: WAKING_UP}
+35.01;6;Executor0;;{state: PARSING}
+36.01;4;Switch;;{queue_size:1}
+36.01;6;Executor0;Database Out;{Type:REQUEST, CreationTime:5, Source:Executor0, Dest:Database}
+36.01;6;Executor0;;{state: WAITING}
+36.01;4;Switch;Database;{Type:REQUEST, CreationTime:5, Source:Executor0, Dest:Database}
+36.01;4;Switch;;{queue_size:0}
+40;1;MockDb;out;{Type:RESPONSE, CreationTime:3, Source:Database, Dest:Executor0}
+40;1;MockDb;;10
+40;4;Switch;;{queue_size:1}
+40;4;Switch;Executor0;{Type:RESPONSE, CreationTime:3, Source:Database, Dest:Executor0}
+40;4;Switch;;{queue_size:0}
+40;6;Executor0;;{state: COMPUTING}
+42;5;LambdaDispatch;;{r: 0.01, queue_size:2, state: WORKING, Execs: ['Available']}
+42;6;Executor0;Response Out;{Type:RESPONSE, CreationTime:5, Source:Executor0, Dest:JavaScript endpoint}
+42;6;Executor0;Notify port;Executor0
+42;6;Executor0;;{state: SLEEPING}
+42.01;5;LambdaDispatch;Executor0;{Type:REQUEST, CreationTime:6, Source:BROWSER, Dest:Lambda}
+42.01;5;LambdaDispatch;;{r: inf, queue_size:1, state: BLOCKED, Execs: ['In Use']}
+42.01;6;Executor0;;{state: WAKING_UP}
+45.01;6;Executor0;;{state: PARSING}
+46.01;4;Switch;;{queue_size:1}
+46.01;6;Executor0;Database Out;{Type:REQUEST, CreationTime:6, Source:Executor0, Dest:Database}
+46.01;6;Executor0;;{state: WAITING}
+46.01;4;Switch;Database;{Type:REQUEST, CreationTime:6, Source:Executor0, Dest:Database}
+46.01;4;Switch;;{queue_size:0}
+50;1;MockDb;out;{Type:RESPONSE, CreationTime:3, Source:Database, Dest:Executor0}
+50;1;MockDb;;10
+50;4;Switch;;{queue_size:1}
+50;4;Switch;Executor0;{Type:RESPONSE, CreationTime:3, Source:Database, Dest:Executor0}
+50;4;Switch;;{queue_size:0}
+50;6;Executor0;;{state: COMPUTING}
+52;5;LambdaDispatch;;{r: 0.01, queue_size:1, state: WORKING, Execs: ['Available']}
+52;6;Executor0;Response Out;{Type:RESPONSE, CreationTime:6, Source:Executor0, Dest:JavaScript endpoint}
+52;6;Executor0;Notify port;Executor0
+52;6;Executor0;;{state: SLEEPING}
+52.01;5;LambdaDispatch;Executor0;{Type:REQUEST, CreationTime:7, Source:BROWSER, Dest:Lambda}
+52.01;5;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['In Use']}
+52.01;6;Executor0;;{state: WAKING_UP}
+55.01;6;Executor0;;{state: PARSING}
+56.01;4;Switch;;{queue_size:1}
+56.01;6;Executor0;Database Out;{Type:REQUEST, CreationTime:7, Source:Executor0, Dest:Database}
+56.01;6;Executor0;;{state: WAITING}
+56.01;4;Switch;Database;{Type:REQUEST, CreationTime:7, Source:Executor0, Dest:Database}
+56.01;4;Switch;;{queue_size:0}
+60;1;MockDb;out;{Type:RESPONSE, CreationTime:3, Source:Database, Dest:Executor0}
+60;1;MockDb;;inf
+60;4;Switch;;{queue_size:1}
+60;4;Switch;Executor0;{Type:RESPONSE, CreationTime:3, Source:Database, Dest:Executor0}
+60;4;Switch;;{queue_size:0}
+60;6;Executor0;;{state: COMPUTING}
+62;5;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['Available']}
+62;6;Executor0;Response Out;{Type:RESPONSE, CreationTime:7, Source:Executor0, Dest:JavaScript endpoint}
+62;6;Executor0;Notify port;Executor0
+62;6;Executor0;;{state: SLEEPING}
+62;1;MockDb;;inf
+62;2;MockAPI;;inf
+62;4;Switch;;{queue_size:0}
+62;5;LambdaDispatch;;{r: inf, queue_size:0, state: EMPTY, Execs: ['Available']}
+62;6;Executor0;;{state: SLEEPING}
