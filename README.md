@@ -5,11 +5,11 @@ This project was created for the purposes of showcasing a simple internet
 simulation using Cadmium for Dr. Gabriel Wainer's SYSC5104 class.
 
 This simulation involves 2 Coupled Models, which are the Client and the Cloud.
-The Client is split into 2 atomic models. The Cloud is split into 3 atomic models
-and one coupled model, being the Lambda. The Lambda is then split into 4 atomic
-(2 unique) models. This can all be shown in the diagram below:
+The Client is split into 3 atomic models. The Cloud is split into 3 atomic models
+and one coupled model, being the Lambda. The Lambda is then split into 3 unique
+atomic models. This is all shown in the diagram below:
 
-![Simple Internet Model](https://cdn.discordapp.com/attachments/1066838119279771748/1078024321915703306/image.png)
+![Simple Internet Model](https://cdn.discordapp.com/attachments/1066838119279771748/1078756835584118845/image.png)
 
 ## Files
 
@@ -37,35 +37,36 @@ All source Files can be found in /include. In there are the following files:
  - ### Database.h
    - This is the atomic model representing the Database. It takes incoming requests
    and generates a proper response to send back through the executor
- - ### Dispatcher.h
-   - This is the atomic model representing the Dispatcher. It takes incoming 
-   requests and dispatches them to one of the executors.
  - ### Executor.h
    - This is the atomic model representing the Executor. It takes incoming
    requests from the dispatcher, sends them to the database, and then waits for
    the database to generate a response and sends that back to the dispatcher.
+ - ### Internet.h
+   - This is the coupled model representing the entire system. It couples
+     together the client and the cloud.
  - ### Lambda.h
    - This is the coupled model representing the Lambda. It couples together
    the dispatcher and all of the executors.
- - ### Internet.h
-   - This is the coupled model representing the entire system. It couples
-   together the client and the cloud. 
+ - ### LambdaDispatcher.h
+   - This is the atomic model representing the Dispatcher. It takes incoming
+     requests and dispatches them to one of the executors.
  - ### Packet.h
    - This is the message type that is being passed between all of the models.
    It can either be a request or a response. 
+- ### PacketCounter.h
+   - This is an atomic model which recieves and keeps track of
+  responses from the cloud.
+- ### Switch.h
+   - This is an atomic model which acts as an intermediary between the executors
+and the database.
 ## Compiling and Running
-### Compilation Steps
 In order to compile, make sure Cadmium is Installed and placed in the same folder 
-as this project (IE cadmium_v2 and simple_website_simulation should both be in
-the same folder). Then, in the project directory, run a make command. This will
-compile the program and create an executable file in the bin folder called
-serverless_recipe_site_sim. 
-### Running the Simulation
-Run the executable file mentioned above (or if you are still in the root folder
-of the project you can run ./bin/serverless_recipe_site_sim). This will run the
-simulation and generate a log file in the root project folder. You can view this
-log file in order to see how the simulation ran.
+as this project's root folder (IE cadmium_v2 and simple_website_simulation should both be in
+the same folder). Then, in the project directory, run the 'do_everything.sh' script.
+This will generate and run the main and all of the test executables, which will
+generate new log files in the log folder (replacing the pre-existing ones)
 ## Tests
 Our project had software tests which are located in the test folder. These contain
-test scripts which are used to test each of the atomic models. They can be ran by
-...
+test scripts which are used to test each of the atomic models. They are
+automatically ran when running the script mentioned above, with their output
+logs generated in the logs folder.
