@@ -8,7 +8,7 @@
 #include "CounterTest.h"
 #include "ClientDispatcherTest.h"
 #include "ClientTest.h"
-
+#include "ExecutorTest.h"
 using namespace std;
 using namespace sim;
 
@@ -18,6 +18,7 @@ int main(){
         std::make_pair("counterTest", std::make_shared<test::CounterTest>()),
         std::make_pair("ClientDispatcherTest", std::make_shared<test::ClientDispatchTest>()),
         std::make_pair("ClientTest", std::make_shared<test::ClientTest>()),
+        std::make_pair("ExecutorTest", std::make_shared<test::ExecutorTest>()),
     };
 
     for(const auto& test: tests){
