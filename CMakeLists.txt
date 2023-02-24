@@ -21,6 +21,6 @@ add_executable(test tests/TestDriver.cpp
         include/Switch.h
         tests/GeneratorTest.h
         tests/GeneratorTest.h
-        tests/CounterTest.h tests/BigIestream.hpp)
+        tests/CounterTest.h tests/BigIestream.hpp tests/ClientDispatcherTest.h)
 target_link_libraries(serverless_recipe_site_sim ${Boost_LIBRARIES})
 target_link_libraries(test ${Boost_LIBRARIES})

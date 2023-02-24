@@ -49,7 +49,8 @@ namespace test {
         explicit BigEventParser(const char* file_path) {
             file.open(file_path);
             if(!file.is_open()) {
-                throw CadmiumModelException("input event file could not be opened");
+                stringstream ss(file_path);
+                throw CadmiumModelException("input event file could not be opened:"+ss.str());
             }
         };
 
