@@ -4,9 +4,9 @@
 #include <iostream>
 #include "cadmium/core/simulation/root_coordinator.hpp"
 #include "cadmium/core/logger/csv.hpp"
-#include <cadmium/lib/iestream.hpp>
 #include "GeneratorTest.h"
 #include "CounterTest.h"
+#include "ClientDispatcherTest.h"
 
 using namespace std;
 using namespace sim;
@@ -14,7 +14,8 @@ using namespace sim;
 int main(){
     std::vector<std::pair<std::string, shared_ptr<cadmium::Coupled>>> tests{
         std::make_pair("generatorTest", std::make_shared<test::GeneratorTest>()),
-        std::make_pair("counterTest", std::make_shared<test::CounterTest>())
+        std::make_pair("counterTest", std::make_shared<test::CounterTest>()),
+        std::make_pair("ClientDispatcherTest", std::make_shared<test::ClientDispatchTest>())
     };
 
     for(const auto& test: tests){

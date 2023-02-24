@@ -15,7 +15,6 @@
 namespace test {
 using namespace sim;
 using namespace std;
-using namespace cadmium::lib;
 using namespace cadmium;
 
     struct CounterTest : public cadmium::Coupled {
