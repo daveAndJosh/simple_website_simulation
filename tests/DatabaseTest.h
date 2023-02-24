@@ -1,5 +1,4 @@
 #pragma once
-#include "../include/Database.h"
 #include <cadmium/core/modeling/coupled.hpp>
 #include <iostream>
 #include <string>
@@ -8,6 +7,7 @@
 #include <queue>
 #include "BigIestream.hpp"
 #include "Packet.h"
+#include "../include/Database.h"
 namespace test {
     using namespace sim;
     using namespace std;
