@@ -30,6 +30,7 @@ add_executable(test tests/TestDriver.cpp
         tests/APIGatewayTest.h
         tests/BucketTest.h
         tests/DatabaseTest.h
-        tests/ClientTest.h)
+        tests/ClientTest.h
+        tests/LambdaDispatcherTest.h)
 target_link_libraries(serverless_recipe_site_sim ${Boost_LIBRARIES})
 target_link_libraries(test ${Boost_LIBRARIES})

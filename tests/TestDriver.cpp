@@ -12,6 +12,7 @@
 #include "APIGatewayTest.h"
 #include "BucketTest.h"
 #include "DatabaseTest.h"
+#include "LambdaDispatcherTest.h"
 using namespace std;
 using namespace sim;
 
@@ -25,6 +26,7 @@ int main(){
         std::make_pair("ApiGatewayTest",std::make_shared<test::APIGatewayTest>()),
         std::make_pair("BucketTest",std::make_shared<test::BucketTest>()),
         std::make_pair("DatabaseTest",std::make_shared<test::DatabaseTest>()),
+        std::make_pair("LambdaDispatcherTest",std::make_shared<test::LambdaDispatcherTest>()),
     };
 
     for(const auto& test: tests){
