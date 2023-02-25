@@ -52,9 +52,7 @@ namespace sim{
 
             //EOC
             for(const auto& exec: executors){
-                const auto& databaseOutPort = exec->dbOutPort;
                 const auto& resultOut= exec->respOut;
-                addEOC(databaseOutPort, dbSend);
                 addEOC(resultOut, rspOut);
             }
             comSwitch->addOutPort("Database");
